@@ -1,12 +1,5 @@
-import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { authenticated } from '../store/actions/userActions'
-
+import React from 'react'
 function Index() {
-  const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch(authenticated())
-  }, [])
   return (
     <div>
       test

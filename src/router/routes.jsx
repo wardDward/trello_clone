@@ -9,6 +9,7 @@ import Register from "../pages/auth/Register";
 import RegisterRedirection from "../pages/auth/RegisterRedirection";
 import Page_404 from "../pages/Page_404";
 import { ProtectedRoute, RedirectAuthenticatedUser } from "./ProtectedRoute";
+import DefaultLayout from "../layout/DefaultLayout";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -19,7 +20,9 @@ const router = createBrowserRouter(
       <Route path="*" element={<Page_404 />} />
 
       <Route element={<ProtectedRoute />}>
-        <Route path="/" element={<Index />} />
+        <Route element={<DefaultLayout/>}>
+          <Route path="/" element={<Index />} />
+        </Route>
       </Route>
     </Route>
   )
