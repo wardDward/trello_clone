@@ -16,7 +16,7 @@ const router = createBrowserRouter(
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/create_account" element={<RegisterRedirection />} />
-      <Route path="*" element={<Page_404/>}/>
+      <Route path="*" element={<Page_404 />} />
     </Route>
   )
 );

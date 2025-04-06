@@ -3,7 +3,7 @@ import Google from "../../assets/google.png";
 import Github from "../../assets/github.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { checkEmail } from "../../store/actions/userActions";
+import { checkRegisterEmail } from "../../store/actions/userActions";
 
 function Register() {
   const dispatch = useDispatch()
@@ -13,7 +13,7 @@ function Register() {
 
   const handleEmail = async (e) => {
     e.preventDefault()
-    const response = await dispatch(checkEmail(email))
+    const response = await dispatch(checkRegisterEmail(email))
     console.log(response);
 
     if (response.meta.requestStatus === "fulfilled") {
