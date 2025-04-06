@@ -1,18 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { authenticated, checkEmail, checkRegisterEmail, createAccount } from "../actions/userActions";
+import { authenticated, checkEmail, checkRegisterEmail, createAccount, logIn } from "../actions/userActions";
 
 export const userSlice = createSlice({
     name: 'users',
     initialState: {
         isLoading: false,
+        isLoggedIn: JSON.parse(localStorage.getItem("isLoggedIn")) || false,
         user: null,
-        errorMessage: {}
+        errorMessage: null
     },
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(checkEmail.pending, (state) => {
             state.isLoading = true
-            state.errorMessage = {}
+            state.errorMessage = null
         })
         builder.addCase(checkEmail.fulfilled, (state) => {
             state.isLoading = false
@@ -41,19 +42,37 @@ export const userSlice = createSlice({
             state.isLoading = false
             state.errorMessage = action.payload
         })
-        builder.addCase(authenticated.pending, (state) => {
+        builder.addCase(logIn.fulfilled, (state) => {
+            state.isLoading = false
+            state.isLoggedIn = true;
+            localStorage.setItem('isLoggedIn', JSON.stringify(true))
+        })
+        builder.addCase(logIn.rejected, (state, action) => {
+            state.isLoading = false
+            state.errorMessage = action.payload
+            state.isLoggedIn = true;
+            localStorage.setItem('isLoggedIn', JSON.stringify(false))
+        })
+        builder.addCase(logIn.pending, (state) => {
             state.isLoading = true
+            state.errorMessage = {}
+        })
+        builder.addCase(authenticated.pending, (state) => {
             state.errorMessage = {}
             state.user = {}
         })
         builder.addCase(authenticated.fulfilled, (state, action) => {
             state.isLoading = false
+            state.isLoggedIn = true;
+            localStorage.setItem('isLoggedIn', JSON.stringify(true))
             state.user = action.payload
         })
         builder.addCase(authenticated.rejected, (state, action) => {
+            localStorage.removeItem('isLoggedIn');
             state.isLoading = false
             state.errorMessage = action.payload
-            state.user = {}
+            state.isLoggedIn = false;
+            state.user = null
         })
     }
 })
