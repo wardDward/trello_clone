@@ -15,7 +15,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<Index />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/create_account/:token" element={<RegisterRedirection />} />
+      <Route path="/create_account" element={<RegisterRedirection />} />
       <Route path="*" element={<Page_404/>}/>
     </Route>
   )

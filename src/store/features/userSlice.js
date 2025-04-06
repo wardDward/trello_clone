@@ -1,14 +1,8 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice } from "@reduxjs/toolkit";
+import { checkEmail, createAccount } from "../actions/userActions";
 
-export const checkEmail = createAsyncThunk("users/checkEmail", async (data, thunkApi) => {
-    try {
-       await axios.get(`http://localhost:8000/api/users/email?email=${data}`)
-       return
-    } catch (error) {
-        return thunkApi.rejectWithValue(error.response.data.errors)
-    }
-})
+
+
 
 export const userSlice = createSlice({
     name: 'users',
@@ -19,18 +13,27 @@ export const userSlice = createSlice({
     },
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(checkEmail.pending, (state) =>{
+        builder.addCase(checkEmail.pending, (state) => {
             state.isLoading = true
+            state.errorMessage = {}
+
         })
-        builder.addCase(checkEmail.fulfilled, (state) =>{
+        builder.addCase(checkEmail.fulfilled, (state) => {
             state.isLoading = false
         })
         builder.addCase(checkEmail.rejected, (state, action) => {
             state.isLoading = false
             state.errorMessage = action.payload
         })
-
-     }
+        builder.addCase(createAccount.pending, (state) => {
+            state.isLoading = true
+            state.errorMessage = {}
+        })
+        builder.addCase(createAccount.rejected, (state, action) => {
+            state.isLoading = false
+            state.errorMessage = action.payload
+        })
+    }
 })
 
 export default userSlice.reducer
