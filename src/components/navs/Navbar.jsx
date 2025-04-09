@@ -1,13 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import DropDown from './DropDown'
+import WorkspaceDropDown from './contents/WorkspaceDropDown';
 
 function Navbar() {
+    const [openDropdownId, setOpenDropdownId] = useState(null);
     return (
         <div className='bg-white py-2 px-[20px] fixed top-0 inset-x-0 flex items-center justify-between border-b-[1px] border-b-slate-300'>
             <div className='flex items-center'>
                 <Link to={'/'} className='text-lg font-bold py-1 px-2 hover:bg-slate-100 rounded-md'>
                     Trello
                 </Link>
+                <div className='flex'>
+                    <DropDown
+                        id={'workspace'}
+                        name={'Workspace'}
+                        openDropdownId={openDropdownId}
+                        setOpenDropdownId={setOpenDropdownId}
+                        renderContent={<WorkspaceDropDown/>}
+                        />
+                </div>
             </div>
             <div className='flex items-center'>
                 {/* notification svg */}

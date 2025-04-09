@@ -23,7 +23,7 @@ function DropDown({ id, name, openDropdownId, setOpenDropdownId, renderContent }
 
   return (
     <div className="relative" ref={dropdownRef}>
-      <button onClick={toggleDropdown} className="py-1 px-2 hover:bg-slate-100 rounded-md">
+      <button onClick={toggleDropdown} className="py-1 px-2 hover:bg-slate-100 rounded-md text-sm">
         {name}
       </button>
       {isOpen && (
