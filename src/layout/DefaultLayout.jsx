@@ -15,9 +15,9 @@ function DefaultLayout() {
         <>
             <Navbar />
             <div className='h-screen max-w-full bg-slate-100 flex justify-center mt-[50px]'>
-                <div className='flex w-full md:w-[80%] lg:w-[85%] xl:w-[70%]'>
+                <div className='flex w-full xl:w-[70%]'>
                     <Sidebar />
-                    <div className='ml-0 md:ml-[31.5%] lg:ml-[27.5%] xl:ml-[21.5%]'>
+                    <div className='ml-0 lg:ml-[23%] xl:ml-[21.5%]'>
                         <Outlet />
                     </div>
                 </div>
